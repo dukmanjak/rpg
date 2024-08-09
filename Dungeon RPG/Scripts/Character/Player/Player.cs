@@ -6,7 +6,8 @@ public partial class Player : CharacterBody3D
     [ExportGroup("Required Nodes")]
     [Export] public AnimationPlayer animPlayerNode;
     [Export] public Sprite3D spriteNode;
-    private Vector2 direction = new();
+    [Export] public StateMachine stateMachineNode;
+    public Vector2 direction = new();
     public override void _Ready()
     {
     }

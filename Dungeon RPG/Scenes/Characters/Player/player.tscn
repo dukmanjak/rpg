@@ -1,6 +1,6 @@
-[gd_scene load_steps=36 format=3 uid="uid://bqovi25quc7qb"]
+[gd_scene load_steps=37 format=3 uid="uid://bqovi25quc7qb"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_n0ivs"]
+[ext_resource type="Script" path="res://Scripts/Character/Player/Player.cs" id="1_n0ivs"]
 [ext_resource type="Texture2D" uid="uid://dxowcargxwns2" path="res://Assets/Sprites/Characters/Player/Running/Running_000.png" id="1_pcrx3"]
 [ext_resource type="Texture2D" uid="uid://u16x5d5nluso" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_000.png" id="2_rom1y"]
 [ext_resource type="Texture2D" uid="uid://b6bcrtc3suy6n" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_001.png" id="3_80u0y"]
@@ -30,8 +30,9 @@
 [ext_resource type="Texture2D" uid="uid://dtek3w6rth2er" path="res://Assets/Sprites/Characters/Player/Running/Running_009.png" id="27_r5j1v"]
 [ext_resource type="Texture2D" uid="uid://byv8qkwmnqvvp" path="res://Assets/Sprites/Characters/Player/Running/Running_010.png" id="28_50cw1"]
 [ext_resource type="Texture2D" uid="uid://cpr5wob2harvk" path="res://Assets/Sprites/Characters/Player/Running/Running_011.png" id="29_7n3r6"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerIdleState.cs" id="31_aumb7"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerMoveState.cs" id="32_t776c"]
+[ext_resource type="Script" path="res://Scripts/Character/Player/PlayerIdleState.cs" id="31_aumb7"]
+[ext_resource type="Script" path="res://Scripts/Character/Player/PlayerMoveState.cs" id="32_t776c"]
+[ext_resource type="Script" path="res://Scripts/Character/StateMachine.cs" id="33_5f8hy"]
 
 [sub_resource type="Animation" id="Animation_7xw3d"]
 resource_name = "Idle"
@@ -73,10 +74,11 @@ _data = {
 "Move": SubResource("Animation_unarh")
 }
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animPlayerNode", "spriteNode")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animPlayerNode", "spriteNode", "stateMachineNode")]
 script = ExtResource("1_n0ivs")
 animPlayerNode = NodePath("AnimationPlayer")
 spriteNode = NodePath("Sprite3D")
+stateMachineNode = NodePath("StateMachine")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.173361, -0.813105, -0.024596)
@@ -93,3 +95,8 @@ script = ExtResource("31_aumb7")
 
 [node name="MoveState" type="Node" parent="."]
 script = ExtResource("32_t776c")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("currentState", "states")]
+script = ExtResource("33_5f8hy")
+currentState = NodePath("../IdleState")
+states = [NodePath("../IdleState"), NodePath("../MoveState")]
