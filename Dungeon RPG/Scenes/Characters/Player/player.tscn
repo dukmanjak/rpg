@@ -97,11 +97,11 @@ _data = {
 "Sliding": SubResource("Animation_8c820")
 }
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animPlayerNode", "spriteNode", "stateMachineNode")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayerNode", "SpriteNode", "StateMachineNode")]
 script = ExtResource("1_n0ivs")
-animPlayerNode = NodePath("AnimationPlayer")
-spriteNode = NodePath("Sprite3D")
-stateMachineNode = NodePath("StateMachine")
+AnimPlayerNode = NodePath("AnimationPlayer")
+SpriteNode = NodePath("Sprite3D")
+StateMachineNode = NodePath("StateMachine")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.173361, -0.813105, -0.024596)
@@ -123,10 +123,12 @@ script = ExtResource("31_aumb7")
 
 [node name="MoveState" type="Node" parent="StateMachine"]
 script = ExtResource("32_t776c")
+speed = 10.0
 
 [node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("dashTimerNode")]
 script = ExtResource("39_gjh6k")
 dashTimerNode = NodePath("Timer")
+speed = 20.0
 
 [node name="Timer" type="Timer" parent="StateMachine/DashState"]
 wait_time = 0.4

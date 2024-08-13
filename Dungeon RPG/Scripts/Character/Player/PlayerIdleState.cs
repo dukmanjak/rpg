@@ -10,7 +10,7 @@ public partial class PlayerIdleState : PlayerState
 
         if (characterNode.direction != Vector2.Zero)
         {
-            characterNode.stateMachineNode.SwitchState<PlayerMoveState>();
+            characterNode.StateMachineNode.SwitchState<PlayerMoveState>();
         }
     }
 
@@ -19,12 +19,12 @@ public partial class PlayerIdleState : PlayerState
 
         if (Input.IsActionJustPressed(GameConstants.INPUT_DASH))
         {
-            characterNode.stateMachineNode.SwitchState<PlayerDashState>();
+            characterNode.StateMachineNode.SwitchState<PlayerDashState>();
         }
     }
     protected override void EnterState()
     {
-        characterNode.animPlayerNode.Play(GameConstants.ANIM_IDLE);
+        characterNode.AnimPlayerNode.Play(GameConstants.ANIM_IDLE);
     }
 
 }
