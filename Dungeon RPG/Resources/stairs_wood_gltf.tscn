@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ty8niauyl2yy"]
+
+[ext_resource type="PackedScene" uid="uid://cs6cbn6mmjf1b" path="res://Assets/Models/Dungeon/gltf/stairs_wood.gltf.glb" id="1_p2y3l"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_awpn2"]
+
+[node name="stairs_wood_gltf" instance=ExtResource("1_p2y3l")]
+
+[node name="@StaticBody3D@86163" type="StaticBody3D" parent="stairs_wood" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="stairs_wood/@StaticBody3D@86163" index="0"]
+shape = SubResource("ConvexPolygonShape3D_awpn2")

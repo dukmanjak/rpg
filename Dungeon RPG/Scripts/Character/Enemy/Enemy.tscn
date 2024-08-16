@@ -220,7 +220,7 @@ StateMachineNode = NodePath("StateMachine")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00104046, -0.00318265, -0.000267029)
 pixel_size = 0.0025
-texture = ExtResource("1_of38m")
+texture = ExtResource("2_m8own")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite3D")

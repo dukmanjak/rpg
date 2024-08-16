@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsu3nwsj0k14v"]
+[gd_scene load_steps=9 format=3 uid="uid://bsu3nwsj0k14v"]
 
 [ext_resource type="PackedScene" uid="uid://n2x84p8fva2m" path="res://Assets/Models/Dungeon/gltf/floor_tile_small.gltf.glb" id="1_dg7ut"]
 [ext_resource type="PackedScene" uid="uid://cmxr2bxgj74v7" path="res://Assets/Models/Dungeon/gltf/wall.gltf.glb" id="2_akiaa"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bqs1bspi34d72" path="res://Assets/Models/Dungeon/gltf/wall_Tsplit.gltf.glb" id="5_t7j7r"]
 [ext_resource type="PackedScene" uid="uid://bricc6u78bxiv" path="res://Assets/Models/Dungeon/gltf/wall_open_scaffold.gltf.glb" id="6_fastw"]
 [ext_resource type="PackedScene" uid="uid://lrsw4p2bpg66" path="res://Assets/Models/Dungeon/gltf/wall_doorway_scaffold.glb" id="7_pi25y"]
+[ext_resource type="PackedScene" uid="uid://cs6cbn6mmjf1b" path="res://Assets/Models/Dungeon/gltf/stairs_wood.gltf.glb" id="8_qjcix"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -29,3 +30,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.159824, 0, 9.61328)
 
 [node name="wall_doorway_scaffold2" parent="." instance=ExtResource("7_pi25y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.72753, -2.38419e-07, 6.26508)
+
+[node name="stairs_wood_gltf" parent="." instance=ExtResource("8_qjcix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8515, 0, -0.933125)
