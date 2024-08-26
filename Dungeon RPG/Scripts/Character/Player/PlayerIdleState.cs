@@ -6,7 +6,6 @@ public partial class PlayerIdleState : PlayerState
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print("Idle state physics process");
 
         if (characterNode.direction != Vector2.Zero)
         {

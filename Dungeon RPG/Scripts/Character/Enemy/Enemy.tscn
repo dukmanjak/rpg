@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://44siyb6qoss1"]
+[gd_scene load_steps=112 format=3 uid="uid://44siyb6qoss1"]
 
 [ext_resource type="Texture2D" uid="uid://bfrxexoxlm3o" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_006.png" id="1_m8hn8"]
 [ext_resource type="Texture2D" uid="uid://diufckn35nlv2" path="res://Assets/Sprites/Characters/Enemy Knight/TakeHit/0_Demons_of_Darkness_Hurt_000.png" id="1_of38m"]
@@ -103,6 +103,7 @@
 [ext_resource type="PackedScene" uid="uid://cb4oq3w7wrcvd" path="res://Scenes/Characters/state_machine.tscn" id="100_pglli"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyIdleState.cs" id="101_pmt23"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyReturnState.cs" id="103_uxwm4"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyPatrolState.cs" id="104_ikgas"]
 
 [sub_resource type="Animation" id="Animation_e115q"]
 resource_name = "Attack"
@@ -211,11 +212,12 @@ _data = {
 radius = 0.339389
 height = 0.96256
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayerNode", "SpriteNode", "StateMachineNode")]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayerNode", "SpriteNode", "StateMachineNode", "AgentNode")]
 script = ExtResource("1_y5pln")
 AnimPlayerNode = NodePath("AnimationPlayer")
 SpriteNode = NodePath("Sprite3D")
 StateMachineNode = NodePath("StateMachine")
+AgentNode = NodePath("NavigationAgent3D")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00104046, -0.00318265, -0.000267029)
@@ -234,10 +236,16 @@ shape = SubResource("CapsuleShape3D_tunor")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("100_pglli")]
 currentState = NodePath("IdleState")
-states = [NodePath("ReturnState"), NodePath("IdleState")]
+states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState")]
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("101_pmt23")
 
 [node name="ReturnState" type="Node" parent="StateMachine"]
 script = ExtResource("103_uxwm4")
+
+[node name="PatrolState" type="Node" parent="StateMachine"]
+script = ExtResource("104_ikgas")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
