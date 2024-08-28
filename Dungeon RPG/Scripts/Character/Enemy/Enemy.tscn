@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://44siyb6qoss1"]
+[gd_scene load_steps=116 format=3 uid="uid://44siyb6qoss1"]
 
 [ext_resource type="Texture2D" uid="uid://bfrxexoxlm3o" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_006.png" id="1_m8hn8"]
 [ext_resource type="Texture2D" uid="uid://diufckn35nlv2" path="res://Assets/Sprites/Characters/Enemy Knight/TakeHit/0_Demons_of_Darkness_Hurt_000.png" id="1_of38m"]
@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://mbthsoi87npr" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_007.png" id="8_yba3k"]
 [ext_resource type="Texture2D" uid="uid://bitub52cd2bqh" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_008.png" id="9_8ehf8"]
 [ext_resource type="Texture2D" uid="uid://dkb4eh3m5b2rh" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_010.png" id="11_fobfm"]
+[ext_resource type="Texture2D" uid="uid://clsclw48f6tny" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_009.png" id="12_4n7sd"]
 [ext_resource type="Texture2D" uid="uid://c1oaojvhp5x32" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_011.png" id="12_pm5b8"]
-[ext_resource type="Texture2D" uid="uid://bq54j8c3enqvd" path="res://Assets/Icon.png" id="12_uh3fd"]
 [ext_resource type="Texture2D" uid="uid://ox3pqkaneqsi" path="res://Assets/Sprites/Characters/Enemy Knight/Death/0_Demons_of_Darkness_Dying_000.png" id="14_61jii"]
 [ext_resource type="Texture2D" uid="uid://dpxnipkf3gmv2" path="res://Assets/Sprites/Characters/Enemy Knight/Death/0_Demons_of_Darkness_Dying_001.png" id="15_27uqw"]
 [ext_resource type="Texture2D" uid="uid://bqmcpunpjxr4b" path="res://Assets/Sprites/Characters/Enemy Knight/Death/0_Demons_of_Darkness_Dying_002.png" id="16_kuql3"]
@@ -104,6 +104,8 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyIdleState.cs" id="101_pmt23"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyReturnState.cs" id="103_uxwm4"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyPatrolState.cs" id="104_ikgas"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyChaseState.cs" id="105_4vvas"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyAttackState.cs" id="106_wc0wk"]
 
 [sub_resource type="Animation" id="Animation_e115q"]
 resource_name = "Attack"
@@ -118,7 +120,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_m8own"), ExtResource("3_h4ytf"), ExtResource("4_e1s3s"), ExtResource("5_cs2xr"), ExtResource("6_c5gj7"), ExtResource("7_m5rpe"), ExtResource("1_m8hn8"), ExtResource("8_yba3k"), ExtResource("9_8ehf8"), ExtResource("12_uh3fd"), ExtResource("11_fobfm"), ExtResource("12_pm5b8"), null]
+"values": [ExtResource("2_m8own"), ExtResource("3_h4ytf"), ExtResource("4_e1s3s"), ExtResource("5_cs2xr"), ExtResource("6_c5gj7"), ExtResource("7_m5rpe"), ExtResource("1_m8hn8"), ExtResource("8_yba3k"), ExtResource("9_8ehf8"), ExtResource("12_4n7sd"), ExtResource("11_fobfm"), ExtResource("12_pm5b8"), ExtResource("12_pm5b8")]
 }
 
 [sub_resource type="Animation" id="Animation_vgou8"]
@@ -212,17 +214,25 @@ _data = {
 radius = 0.339389
 height = 0.96256
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayerNode", "SpriteNode", "StateMachineNode", "AgentNode")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_2uyqa"]
+radius = 6.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1jns6"]
+radius = 1.4
+
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayerNode", "SpriteNode", "StateMachineNode", "AgentNode", "ChaseAreaNode", "AttackAreaNode")]
 script = ExtResource("1_y5pln")
 AnimPlayerNode = NodePath("AnimationPlayer")
 SpriteNode = NodePath("Sprite3D")
 StateMachineNode = NodePath("StateMachine")
 AgentNode = NodePath("NavigationAgent3D")
+ChaseAreaNode = NodePath("ChaseArea")
+AttackAreaNode = NodePath("AttackArea")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00104046, -0.00318265, -0.000267029)
 pixel_size = 0.0025
-texture = ExtResource("2_m8own")
+texture = ExtResource("12_pm5b8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite3D")
@@ -236,7 +246,7 @@ shape = SubResource("CapsuleShape3D_tunor")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("100_pglli")]
 currentState = NodePath("IdleState")
-states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState")]
+states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState"), NodePath("ChaseState"), NodePath("AttackState")]
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("101_pmt23")
@@ -251,5 +261,30 @@ idleTimerNode = NodePath("Timer")
 [node name="Timer" type="Timer" parent="StateMachine/PatrolState"]
 one_shot = true
 
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("chaseTimerNode")]
+script = ExtResource("105_4vvas")
+chaseTimerNode = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="StateMachine/ChaseState"]
+wait_time = 0.5
+autostart = true
+
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource("106_wc0wk")
+
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
+
+[node name="ChaseArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChaseArea"]
+shape = SubResource("SphereShape3D_2uyqa")
+
+[node name="AttackArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+shape = SubResource("SphereShape3D_1jns6")
