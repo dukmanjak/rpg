@@ -212,7 +212,7 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tunor"]
 radius = 0.339389
-height = 0.96256
+height = 1.23258
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2uyqa"]
 radius = 6.0
@@ -220,13 +220,15 @@ radius = 6.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_1jns6"]
 radius = 1.4
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayerNode", "SpriteNode", "StateMachineNode", "AgentNode", "ChaseAreaNode", "AttackAreaNode")]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("AnimPlayerNode", "SpriteNode", "StateMachineNode", "Hurtboxnode", "AgentNode", "ChaseAreaNode", "AttackAreaNode")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_y5pln")
+stats = Array[Object]([null, null])
 AnimPlayerNode = NodePath("AnimationPlayer")
 SpriteNode = NodePath("Sprite3D")
 StateMachineNode = NodePath("StateMachine")
+Hurtboxnode = NodePath("Hurtbox")
 AgentNode = NodePath("NavigationAgent3D")
 ChaseAreaNode = NodePath("ChaseArea")
 AttackAreaNode = NodePath("AttackArea")
@@ -243,7 +245,7 @@ libraries = {
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0087609, 0.0566685, 0.00471351)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0087609, -0.123802, 0.00471351)
 shape = SubResource("CapsuleShape3D_tunor")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("100_pglli")]
@@ -290,3 +292,11 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
 shape = SubResource("SphereShape3D_1jns6")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.126456, 0)
+shape = SubResource("CapsuleShape3D_tunor")

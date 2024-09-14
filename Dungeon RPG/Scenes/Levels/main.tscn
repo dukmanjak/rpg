@@ -79,10 +79,10 @@ size = Vector3(48.1393, 7.51123, 2.33353)
 size = Vector3(0.641861, 7.51123, 4.89142)
 
 [node name="Main" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9485, 1.66782, 1.38254)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3855, 1.67024, -8.8583)
 
 [node name="Player" parent="." instance=ExtResource("1_y2jl5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1662, 2.00886, -2.83264)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7511, 1.94099, -6.78759)
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.976672, 0.214735, 0, -0.214735, 0.976672, 0, 1, 5)

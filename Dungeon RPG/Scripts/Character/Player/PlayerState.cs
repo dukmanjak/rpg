@@ -1,21 +1,12 @@
 using Godot;
 public abstract partial class PlayerState : CharacterState
 {
-
-      public override void _Notification(int what)
+protected void CheckForAttackInput()
+{
+   
+    if (Input.IsActionJustPressed(GameConstants.INPUT_ATTACK))
     {
-        base._Notification(what);
-        if (what == GameConstants.NOTIFICATION_ENTER_STATE)
-        {
-            EnterState();
-            SetPhysicsProcess(true);
-            SetProcessInput(true);
-        }
-        else if(what == GameConstants.NOTIFICATION_EXIT_STATE)
-        {
-            SetPhysicsProcess(false);
-            SetProcessInput(false);
-        }
+        characterNode.StateMachineNode.SwitchState<PlayerAttackState>();
     }
-    protected virtual void EnterState(){ }
+}
 }
