@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 public abstract partial class Character : CharacterBody3D
 {
@@ -10,6 +12,7 @@ public abstract partial class Character : CharacterBody3D
 	[Export] public Sprite3D SpriteNode {get; private set; } 
 	[Export] public StateMachine StateMachineNode {get; private set; } 
 	[Export] public Area3D Hurtboxnode {get; private set;}
+	[Export] public Area3D HitboxNode {get; private set;}
 
 	[ExportGroup("AI Nodes")]
 	[Export] public Path3D PathNode { get; private set; }
@@ -20,13 +23,21 @@ public abstract partial class Character : CharacterBody3D
 
 	public override void _Ready()
 	{
+		base._Ready();
 		Hurtboxnode.AreaEntered += HandleHurtboxEntered;
 	}
 
     private void HandleHurtboxEntered(Area3D area)
     {
-        GD.Print($"{area.Name} hit");
+        StatResource health = GetStatResource(Stat.Health);
+
+		Character player = area.GetOwner<Character>();
+
+		health.StatValue -= player.GetStatResource(Stat.Strength).StatValue;
+
+		GD.Print(health.StatValue);
     }
+
 
     public void Flip()
 	{
@@ -38,4 +49,9 @@ public abstract partial class Character : CharacterBody3D
 		SpriteNode.FlipH = isMovingLeft;
 	}
 
+    public StatResource GetStatResource(Stat stat)
+    {
+		return stats.Where((element) => element.StatType == stat)
+		.FirstOrDefault();
+    }
 }

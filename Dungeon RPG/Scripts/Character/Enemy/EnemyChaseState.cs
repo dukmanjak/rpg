@@ -24,6 +24,7 @@ public partial class EnemyChaseState : EnemyState
     {
         chaseTimerNode.Timeout -= HandleTimeout;
         characterNode.AttackAreaNode.BodyEntered -= HandleAttackAreaEntered;
+        characterNode.AttackAreaNode.BodyExited -= HandleAttackAreaExited;
     }
 
     private void HandleTimeout()

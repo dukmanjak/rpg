@@ -1,5 +1,5 @@
 using Godot;
-using System;
+
 
 public partial class PlayerAttackState : PlayerState
 {
@@ -35,5 +35,16 @@ public partial class PlayerAttackState : PlayerState
         comboCounter = Mathf.Wrap(comboCounter, 1, maxComboCount + 1);
 
         characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
+    }
+
+    private void PerformHit()
+    {
+        Vector3 newPosition = characterNode.SpriteNode.FlipH ?
+            Vector3.Left :
+            Vector3.Right;
+            float distanceMultiplier = 0.75f;
+            newPosition *= distanceMultiplier;
+
+            characterNode.HitboxNode.Position = newPosition;
     }
 }

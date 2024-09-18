@@ -12,14 +12,4 @@ public partial class Player : Character
 		);
 	}
 
-	public void Flip()
-	{
-		bool isNotMovingHorizontally = Velocity.X == 0; 
-
-		if (isNotMovingHorizontally) { return; }
-
-		bool isMovingLeft = Velocity.X < 0;
-		SpriteNode.FlipH = isMovingLeft;
-	}
-
 }

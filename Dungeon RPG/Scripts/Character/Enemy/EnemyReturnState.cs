@@ -32,6 +32,6 @@ public partial class EnemyReturnState : EnemyState
      protected override void ExitState()
     {
         characterNode.ChaseAreaNode.BodyEntered -= HandleChaseAreaBodyEntered;
-    }
+}
 }
 
