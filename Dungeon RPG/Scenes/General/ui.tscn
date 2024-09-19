@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfa0duk7wagjd"]
+
+[ext_resource type="Texture2D" uid="uid://b6ry2d54bwygj" path="res://Assets/Sprites/UI/UI Element 1.png" id="1_b22e2"]
+[ext_resource type="Script" path="res://Scripts/UI/UIController.cs" id="1_qqtom"]
+[ext_resource type="Script" path="res://Scripts/UI/UIContainer.cs" id="2_aoc7o"]
+[ext_resource type="FontFile" uid="uid://dr133senynux4" path="res://Assets/RifficFree-Bold.ttf" id="2_yxpbq"]
+[ext_resource type="Texture2D" uid="uid://70yys6qm7dds" path="res://Assets/Sprites/UI/UI Element 2.png" id="3_7qfts"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i0118"]
+texture = ExtResource("3_7qfts")
+expand_margin_left = 48.0
+expand_margin_top = 8.0
+expand_margin_right = 48.0
+expand_margin_bottom = 16.0
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qqtom")
+
+[node name="Start" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.5
+offset_top = -109.5
+offset_right = 260.5
+offset_bottom = 109.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_aoc7o")
+
+[node name="TextureRect" type="TextureRect" parent="Start"]
+layout_mode = 2
+texture = ExtResource("1_b22e2")
+
+[node name="Button" type="Button" parent="Start"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_yxpbq")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxTexture_i0118")
+theme_override_styles/hover = SubResource("StyleBoxTexture_i0118")
+theme_override_styles/focus = SubResource("StyleBoxTexture_i0118")
+text = "Start"
