@@ -16,6 +16,10 @@ public partial class StateMachine : Node
     {
         Node newState = states.Where((state) => state is T).FirstOrDefault();
 
+        if (newState == null) {return;}
+
+        if(currentState is T) {return;}
+
         currentState.Notification(GameConstants.NOTIFICATION_EXIT_STATE);
         currentState = newState;
         currentState.Notification(GameConstants.NOTIFICATION_ENTER_STATE);
