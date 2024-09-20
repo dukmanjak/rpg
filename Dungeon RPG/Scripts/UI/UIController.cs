@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -16,6 +17,18 @@ public partial class UIController : Control
                 (element) => element.container
         );
         containers[ContainerType.Start].Visible = true;
+
+        containers[ContainerType.Start].ButtonNode.Pressed += HandleStartPressed;
+    }
+
+    private void HandleStartPressed()
+    {
+        GetTree().Paused = false;
+        containers[ContainerType.Start].Visible = false;
+        containers[ContainerType.Stats].Visible = true;
+
+        GameEvents.RaiseStartGame();
+
     }
 
 }

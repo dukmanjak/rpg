@@ -1,10 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfa0duk7wagjd"]
+[gd_scene load_steps=17 format=3 uid="uid://cfa0duk7wagjd"]
 
 [ext_resource type="Texture2D" uid="uid://b6ry2d54bwygj" path="res://Assets/Sprites/UI/UI Element 1.png" id="1_b22e2"]
 [ext_resource type="Script" path="res://Scripts/UI/UIController.cs" id="1_qqtom"]
 [ext_resource type="Script" path="res://Scripts/UI/UIContainer.cs" id="2_aoc7o"]
 [ext_resource type="FontFile" uid="uid://dr133senynux4" path="res://Assets/RifficFree-Bold.ttf" id="2_yxpbq"]
 [ext_resource type="Texture2D" uid="uid://70yys6qm7dds" path="res://Assets/Sprites/UI/UI Element 2.png" id="3_7qfts"]
+[ext_resource type="Texture2D" uid="uid://mrmnstnx62ef" path="res://Assets/Sprites/UI/UI ElementUI 12.png" id="6_68kka"]
+[ext_resource type="Texture2D" uid="uid://bgpk1036jl0f8" path="res://Assets/Sprites/UI/UI ElementUI 6.png" id="7_pyvwp"]
+[ext_resource type="Texture2D" uid="uid://dyf32dom6mgg3" path="res://Assets/Sprites/UI/UI ElementUI 7.png" id="8_486nf"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatLabel.cs" id="9_44nne"]
+[ext_resource type="Texture2D" uid="uid://ccj4ykfq0cp2f" path="res://Assets/Sprites/UI/UI ElementUI 8.png" id="9_palt5"]
+[ext_resource type="Resource" uid="uid://do7hdvuaowlm8" path="res://Resources/player_health_stat.tres" id="10_5e3v6"]
+[ext_resource type="Texture2D" uid="uid://wndihoggj8pj" path="res://Assets/Sprites/UI/UI ElementUI 9.png" id="10_edhjd"]
+[ext_resource type="Resource" uid="uid://doinwvv2ffog4" path="res://Resources/player_strength_stat.tres" id="12_3iwkj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i0118"]
 texture = ExtResource("3_7qfts")
@@ -13,7 +21,14 @@ expand_margin_top = 8.0
 expand_margin_right = 48.0
 expand_margin_bottom = 16.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rsqi1"]
+texture = ExtResource("6_68kka")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8tj0x"]
+texture = ExtResource("7_pyvwp")
+
 [node name="UI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qqtom")
 
-[node name="Start" type="VBoxContainer" parent="."]
+[node name="Start" type="VBoxContainer" parent="." node_paths=PackedStringArray("ButtonNode")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -37,6 +52,7 @@ offset_bottom = 109.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_aoc7o")
+ButtonNode = NodePath("Button")
 
 [node name="TextureRect" type="TextureRect" parent="Start"]
 layout_mode = 2
@@ -51,3 +67,104 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_i0118")
 theme_override_styles/hover = SubResource("StyleBoxTexture_i0118")
 theme_override_styles/focus = SubResource("StyleBoxTexture_i0118")
 text = "Start"
+
+[node name="Stats" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 232.0
+offset_bottom = 272.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_rsqi1")
+script = ExtResource("2_aoc7o")
+container = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Stats"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Stats/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Health" type="Panel" parent="Stats/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_8tj0x")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/Health"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 4.0
+offset_right = 76.0
+offset_bottom = 44.0
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/Health/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_486nf")
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Health/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_yxpbq")
+theme_override_font_sizes/font_size = 28
+text = "---
+"
+script = ExtResource("9_44nne")
+statResource = ExtResource("10_5e3v6")
+
+[node name="Strength" type="Panel" parent="Stats/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_8tj0x")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/Strength"]
+offset_left = 20.0
+offset_top = 4.0
+offset_right = 76.0
+offset_bottom = 44.0
+theme_override_constants/separation = 15
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/Strength/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_palt5")
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Strength/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_yxpbq")
+theme_override_font_sizes/font_size = 28
+text = "---
+"
+script = ExtResource("9_44nne")
+statResource = ExtResource("12_3iwkj")
+
+[node name="Enemy Count" type="Panel" parent="Stats/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_8tj0x")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/Enemy Count"]
+offset_left = 20.0
+offset_top = 4.0
+offset_right = 76.0
+offset_bottom = 44.0
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="Stats/MarginContainer/VBoxContainer/Enemy Count/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_edhjd")
+
+[node name="Label" type="Label" parent="Stats/MarginContainer/VBoxContainer/Enemy Count/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_yxpbq")
+theme_override_font_sizes/font_size = 28
+text = "---
+"

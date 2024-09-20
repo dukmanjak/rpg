@@ -1,13 +1,14 @@
-[gd_scene load_steps=93 format=3 uid="uid://bqovi25quc7qb"]
+[gd_scene load_steps=92 format=3 uid="uid://bqovi25quc7qb"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Player/Player.cs" id="1_n0ivs"]
 [ext_resource type="Texture2D" uid="uid://dxowcargxwns2" path="res://Assets/Sprites/Characters/Player/Running/Running_000.png" id="1_pcrx3"]
+[ext_resource type="Resource" uid="uid://do7hdvuaowlm8" path="res://Resources/player_health_stat.tres" id="2_67x7u"]
 [ext_resource type="Texture2D" uid="uid://dal2tljlqisa7" path="res://Assets/Sprites/Characters/Player/Sliding/Sliding_000.png" id="2_dnrff"]
 [ext_resource type="Texture2D" uid="uid://tgshyhswr4uy" path="res://Assets/Sprites/Characters/Player/Slashing/Slashing_011.png" id="2_kbpxa"]
-[ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="2_op814"]
 [ext_resource type="Texture2D" uid="uid://u16x5d5nluso" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_000.png" id="2_rom1y"]
 [ext_resource type="Texture2D" uid="uid://b4md8qtjnwjw0" path="res://Assets/Sprites/Characters/Player/Dying/Dying_014.png" id="3_3vhww"]
 [ext_resource type="Texture2D" uid="uid://b6bcrtc3suy6n" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_001.png" id="3_80u0y"]
+[ext_resource type="Resource" uid="uid://doinwvv2ffog4" path="res://Resources/player_strength_stat.tres" id="3_igy3t"]
 [ext_resource type="Texture2D" uid="uid://c0itm8j20sog6" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_003.png" id="4_nhyvt"]
 [ext_resource type="Texture2D" uid="uid://b0253045fy81w" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_004.png" id="5_javag"]
 [ext_resource type="Texture2D" uid="uid://c85b5y08y0x8t" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_005.png" id="6_a5mj6"]
@@ -81,18 +82,6 @@
 [ext_resource type="Texture2D" uid="uid://dslvb32t60e0q" path="res://Assets/Sprites/Characters/Player/Dying/Dying_012.png" id="74_acyp7"]
 [ext_resource type="Texture2D" uid="uid://dmby0wxrp8hvt" path="res://Assets/Sprites/Characters/Player/Dying/Dying_013.png" id="75_726ye"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/PlayerDeathState.cs" id="81_8mpnj"]
-
-[sub_resource type="Resource" id="Resource_1mrhm"]
-script = ExtResource("2_op814")
-StatType = 0
-_statValue = 0.0
-StatValue = 100.0
-
-[sub_resource type="Resource" id="Resource_kdrs5"]
-script = ExtResource("2_op814")
-StatType = 1
-_statValue = 0.0
-StatValue = 3.0
 
 [sub_resource type="Animation" id="Animation_eslxl"]
 resource_name = "Attack1"
@@ -244,7 +233,7 @@ collision_mask = 5
 floor_max_angle = 1.55334
 floor_snap_length = 0.4
 script = ExtResource("1_n0ivs")
-stats = Array[Object]([SubResource("Resource_1mrhm"), SubResource("Resource_kdrs5")])
+stats = Array[Object]([ExtResource("2_67x7u"), ExtResource("3_igy3t")])
 AnimPlayerNode = NodePath("AnimationPlayer")
 SpriteNode = NodePath("Sprite3D")
 StateMachineNode = NodePath("StateMachine")
@@ -256,7 +245,7 @@ HitboxShapeNode = NodePath("Hitbox/CollisionShape3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020965, -0.023276, -0.00193837)
 pixel_size = 0.0025
 texture_filter = 0
-texture = ExtResource("74_acyp7")
+texture = ExtResource("2_rom1y")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
