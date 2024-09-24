@@ -3,4 +3,16 @@ using System;
 
 public partial class EnemyCountLabel : Label
 {
+    
+    [Export] private StatResource statResource;
+    public override void _Ready()
+    {
+        GameEvents.OnNewEnemyCount += HandleNewEnemyCount;
+    }
+
+    private void HandleNewEnemyCount(int count)
+    {
+        Text = count.ToString();
+    }
+
 }

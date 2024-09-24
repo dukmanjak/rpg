@@ -6,4 +6,4 @@
 script = ExtResource("1_uk4sx")
 StatType = 1
 _statValue = 0.0
-StatValue = 3.0
+StatValue = 50.0

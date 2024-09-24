@@ -81,7 +81,7 @@
 [ext_resource type="Texture2D" uid="uid://dyhc0dnfqqrba" path="res://Assets/Sprites/Characters/Player/Dying/Dying_011.png" id="73_1dfqi"]
 [ext_resource type="Texture2D" uid="uid://dslvb32t60e0q" path="res://Assets/Sprites/Characters/Player/Dying/Dying_012.png" id="74_acyp7"]
 [ext_resource type="Texture2D" uid="uid://dmby0wxrp8hvt" path="res://Assets/Sprites/Characters/Player/Dying/Dying_013.png" id="75_726ye"]
-[ext_resource type="Script" path="res://Scenes/Characters/Player/PlayerDeathState.cs" id="81_8mpnj"]
+[ext_resource type="Script" path="res://Scripts/Character/Player/PlayerDeathState.cs" id="82_wmqmr"]
 
 [sub_resource type="Animation" id="Animation_eslxl"]
 resource_name = "Attack1"
@@ -281,7 +281,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="DeathState" type="Node" parent="StateMachine"]
-script = ExtResource("81_8mpnj")
+script = ExtResource("82_wmqmr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0214125, 0.272773, 0.00913954)
