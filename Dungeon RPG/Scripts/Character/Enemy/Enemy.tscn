@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://44siyb6qoss1"]
+[gd_scene load_steps=122 format=3 uid="uid://44siyb6qoss1"]
 
 [ext_resource type="Texture2D" uid="uid://bfrxexoxlm3o" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_006.png" id="1_m8hn8"]
 [ext_resource type="Texture2D" uid="uid://diufckn35nlv2" path="res://Assets/Sprites/Characters/Enemy Knight/TakeHit/0_Demons_of_Darkness_Hurt_000.png" id="1_of38m"]
@@ -108,6 +108,7 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyChaseState.cs" id="105_4vvas"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyAttackState.cs" id="106_wc0wk"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyDeathState.cs" id="108_kwf1l"]
+[ext_resource type="Script" path="res://Scripts/Character/AttackHitbox.cs" id="109_ono7a"]
 
 [sub_resource type="Resource" id="Resource_kixua"]
 script = ExtResource("2_xg7xx")
@@ -269,7 +270,7 @@ AttackAreaNode = NodePath("AttackArea")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00104046, -0.00318265, -0.000267029)
 pixel_size = 0.0025
-texture = ExtResource("5_cs2xr")
+texture = ExtResource("2_m8own")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite3D")
@@ -342,6 +343,7 @@ shape = SubResource("CapsuleShape3D_tunor")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22483, 0, 0)
 collision_layer = 4
 collision_mask = 0
+script = ExtResource("109_ono7a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
 shape = SubResource("BoxShape3D_e0g1t")

@@ -5,14 +5,14 @@ using System.Linq;
 public partial class EnemyAttackState : EnemyState
 {
     private Vector3 targetPosition;
+
     protected override void EnterState()
     {
         characterNode.AnimPlayerNode.Play(GameConstants.ANIM_ATTACK);
-        
-        
+
         Node3D target = characterNode.AttackAreaNode
-        .GetOverlappingBodies()
-        .First();
+            .GetOverlappingBodies()
+            .First();
 
         targetPosition = target.GlobalPosition;
 
@@ -32,34 +32,33 @@ public partial class EnemyAttackState : EnemyState
             .GetOverlappingBodies()
             .FirstOrDefault();
 
-            if (target == null)
+        if (target == null)
+        {
+            Node3D chaseTarget = characterNode.ChaseAreaNode
+                .GetOverlappingBodies()
+                .FirstOrDefault();
+
+            if (chaseTarget == null)
             {
-                Node3D chaseTarget = characterNode.ChaseAreaNode.GetOverlappingAreas().FirstOrDefault();
-
-                if(chaseTarget == null)
-                {
-                    characterNode.StateMachineNode.SwitchState<EnemyReturnState>();
-                    return;
-                }
-
-                characterNode.StateMachineNode.SwitchState<EnemyChaseState>();
+                characterNode.StateMachineNode.SwitchState<EnemyReturnState>();
                 return;
             }
-                characterNode.AnimPlayerNode.Play(GameConstants.ANIM_ATTACK);
-                targetPosition = target.GlobalPosition;
 
-            Vector3 direction = characterNode.GlobalPosition
-                .DirectionTo(targetPosition);
-            characterNode.SpriteNode.FlipH = direction.X < 0;
+            characterNode.StateMachineNode.SwitchState<EnemyChaseState>();
+            return;
+        }
 
+        characterNode.AnimPlayerNode.Play(GameConstants.ANIM_ATTACK);
+        targetPosition = target.GlobalPosition;
+
+        Vector3 direction = characterNode.GlobalPosition
+            .DirectionTo(targetPosition);
+        characterNode.SpriteNode.FlipH = direction.X < 0;
     }
 
     private void PerformHit()
     {
-        GD.Print("Enemy Attack");
         characterNode.ToggleHitBox(false);
         characterNode.HitboxNode.GlobalPosition = targetPosition;
-            
-        
     }
 }
