@@ -8,7 +8,8 @@ public partial class GameConstants
     public const string ANIM_DEATH = "Death";
     public const string ANIM_EXPAND = "Expand";
     public const string ANIM_EXPLOSION = "Explosion";
-    public const string ANIM_LIGHTNING = "Lightning";
+
+    public const string ANIM_STUN = "Stun";
         
     
 }
